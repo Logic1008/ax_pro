@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: ax_pro
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:ax_pro;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false}
+    username: ${DB_USER:sa}
+    password: ${DB_PASS:}
+    driver-class-name: org.h2.Driver
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      lettuce:
+        pool:
+          max-active: 64
+          max-idle: 16
+          min-idle: 4
+          time-between-eviction-runs: 60s
+server:
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 20
+    accept-count: 100
+    max-connections: 8192
+sa-token:
+  token-name: token
+  timeout: 2592000
