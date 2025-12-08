@@ -10,6 +10,7 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +18,10 @@ import java.util.Map;
 
 /**
  * 评分规则引擎
- * 支持表达式、单维区间、最近原型、加权阈值、强迫选择与分支流等模式。
+ * - 支持表达式、单维区间、最近原型、加权阈值、强迫选择与分支流等模式
+ * - 作为 Spring Bean 注入，便于在服务层使用与测试替换
  */
+@Component
 public class RuleEngine {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final ExpressionParser parser = new SpelExpressionParser();

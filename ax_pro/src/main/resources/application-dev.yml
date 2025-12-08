@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: ax_pro
+  datasource:
+    url: jdbc:h2:mem:ax_pro;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
+    username: sa
+    password: 
+  data:
+    redis:
+      host: localhost
+      port: 6379
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info

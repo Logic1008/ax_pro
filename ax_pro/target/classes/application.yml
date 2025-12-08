@@ -5,7 +5,6 @@ spring:
     url: ${DB_URL:jdbc:h2:mem:ax_pro;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false}
     username: ${DB_USER:sa}
     password: ${DB_PASS:}
-    driver-class-name: org.h2.Driver
   data:
     redis:
       host: ${REDIS_HOST:localhost}
@@ -15,7 +14,7 @@ spring:
           max-active: 64
           max-idle: 16
           min-idle: 4
-          time-between-eviction-runs: 60s
+          max-wait: 5s
 server:
   tomcat:
     threads:
@@ -25,4 +24,8 @@ server:
     max-connections: 8192
 sa-token:
   token-name: token
-  timeout: 2592000
+  timeout: 604800
+  activity-timeout: 1800
+  is-read-head: true
+  is-read-cookie: false
+  token-style: uuid

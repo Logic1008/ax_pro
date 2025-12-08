@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: ax_pro
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info,prometheus
+resilience4j:
+  rateLimiter:
+    instances:
+      tests-submit-rl:
+        limitForPeriod: 50
+        limitRefreshPeriod: 1s
+        timeoutDuration: 0
+  circuitbreaker:
+    instances:
+      redis:
+        failureRateThreshold: 50
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 50
+        waitDurationInOpenState: 30s
+      scoring:
+        failureRateThreshold: 50
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 50
+        waitDurationInOpenState: 30s

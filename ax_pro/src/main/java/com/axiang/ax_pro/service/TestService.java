@@ -131,11 +131,37 @@ public class TestService {
     }
 
     /**
+     * 批量加载测评下所有选项并按选项ID构建映射
+     */
+    public Map<Long, Option> listOptionsByTest(Long testId) {
+        List<Question> qs = listQuestions(testId);
+        Map<Long, Option> map = new HashMap<>();
+        for (Question q : qs) {
+            for (Option o : listOptionsByQuestion(q.getId())) {
+                map.put(o.getId(), o);
+            }
+        }
+        return map;
+    }
+
+    /**
      * 获取测评的结果集合
      */
     public List<TestResult> listResults(Long testId) {
         List<TestResult> rs = results.get(testId);
         return rs != null ? rs : Collections.emptyList();
+    }
+
+    /**
+     * 根据结果代码查询结果
+     */
+    public TestResult findResultByCode(Long testId, String code) {
+        for (TestResult r : listResults(testId)) {
+            if (code != null && code.equals(r.getCode())) {
+                return r;
+            }
+        }
+        return null;
     }
 }
 
