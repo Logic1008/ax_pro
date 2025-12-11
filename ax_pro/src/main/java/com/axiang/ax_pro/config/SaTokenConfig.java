@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Sa-Token 安全配置
  * - 包含路径：/api/**
- * - 排除路径：认证与只读接口（/api/auth/**、/api/tests、/api/tests/*、/api/tests/*/result/*）
+ * - 排除路径：认证与只读接口（/api/auth/**、/api/tests、/api/tests/*、/api/tests/*//*）
  * - 认证策略：除白名单外统一要求登录（StpUtil.checkLogin）
  * - 错误输出：401 + 标准 JSON
  */
